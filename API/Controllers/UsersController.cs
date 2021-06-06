@@ -19,7 +19,7 @@ namespace API.Controllers
             _context = context;
         }
         [HttpGet]
-        [AllowAnonymous]
+        [AllowAnonymous] 
         public async Task<ActionResult<IEnumerable<AppUser>>> GetUsers(){
             var data = await _context.User.ToListAsync();
             data.ForEachT((v,i)=>{

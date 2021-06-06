@@ -16,19 +16,19 @@ namespace API.Service
         public TokenService(IConfiguration config)
         {
             //
-            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
+            _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"])); //get มาจากappsetting
         }
 
         public string CreateToken(AppUser user)
         {
             var claims = new List<Claim>{
-                new Claim(JwtRegisteredClaimNames.NameId, user.UserName)
+                new Claim(JwtRegisteredClaimNames.NameId, user.UserName) //key
             };
-            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
+            var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature); //genSignature
 
             var tokenDescription = new SecurityTokenDescriptor{
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = DateTime.Now.AddMinutes(7),
                 SigningCredentials = creds
             };
             var tokenHandler = new JwtSecurityTokenHandler();

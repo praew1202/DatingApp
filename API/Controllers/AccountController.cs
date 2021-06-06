@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
-    public class AccountController : BaseAPIController, iTokenService
+    public class AccountController : BaseAPIController
     {
         private readonly DataContext _context;
         private readonly iTokenService _tokenService;
@@ -68,9 +68,5 @@ namespace API.Controllers
             };
         }
 
-        public string CreateToken(AppUser user)
-        {
-            throw new System.NotImplementedException();
-        }
     }
 }
